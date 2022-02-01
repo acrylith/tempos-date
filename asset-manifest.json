@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tempos-date/static/css/main.0bfdf224.css",
+    "main.js": "/tempos-date/static/js/main.2aaed9fd.js",
+    "index.html": "/tempos-date/index.html",
+    "main.0bfdf224.css.map": "/tempos-date/static/css/main.0bfdf224.css.map",
+    "main.2aaed9fd.js.map": "/tempos-date/static/js/main.2aaed9fd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0bfdf224.css",
+    "static/js/main.2aaed9fd.js"
+  ]
+}
