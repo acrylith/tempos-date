@@ -7,31 +7,22 @@ export default function App() {
   const [ dayOfWeek, setDayOfWeek ] = useState();
 
   const weekDay = () => {
-    let daysOfWeek = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"];
-    let nDay = 28 * 12 * year;
+    let daysOfWeek = ["Четвер", "П'ятниця", "Субота", "Неділя", "Понеділок", "Вівторок", "Середа"];
+    let nDay = 28 * 12 * (year - 1);
     // console.log(`В році 12 місяців по 28 днів => ${nDay}`);
-    if(year % 5 === 0) {
-      nDay += year / 5;
-      // console.log(`В кожному п'ятому +1 день => ${nDay}`);
-    }
-    if(year % 100 === 0) {
-      nDay -= year / 100;
-      // console.log(`Мінус кратні 100 але не 500 => ${nDay}`);
-    }
-    if(year % 500 === 0) {
-      nDay += year / 500;
-      // console.log(`кратні 500 => ${nDay}`);
-    }
-    nDay += (month - 1) * 28;
+    nDay = nDay + Math.floor(year / 5 - year / 100 + year / 500);
+    // console.log(`Додаткові дні з високосних років => ${nDay}`);
+    nDay = nDay + ((month - 1) * 28);
     // console.log(`Плюс місяць => ${nDay}`);
-    nDay += day
+    nDay = nDay + day;
     // console.log(`Плюс день => ${nDay}`);
-    if((year % 5 === 0 && year % 100 !== 0) ||
-      (year % 500 === 0 && month >= 3)) {
+    if((year % 5 === 0 && year % 100 !== 0 && month > 2) ||
+      (year % 500 && month > 2)) {
         nDay++
         // console.log(`Плюс один день, якщо минув лютий => ${nDay}`);
     }
-    setDayOfWeek(daysOfWeek[(nDay % 7)])
+    console.log(nDay, (nDay % 7))
+    setDayOfWeek(daysOfWeek[(nDay % 7)]);
   }
 
   return (
@@ -64,7 +55,7 @@ export default function App() {
       <button
         onClick={weekDay}
         disabled={(Number.isInteger(day) && Number.isInteger(month) && Number.isInteger(year))&&
-          (day !== 0 && month !== 0)? false : true}
+          (day !== 0 && month !== 0 && year !== 0)? false : true}
       >
           Обрахувати
       </button>
